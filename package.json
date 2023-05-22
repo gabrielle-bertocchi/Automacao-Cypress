@@ -9,6 +9,7 @@
   "author": "Gabrielle Bertocchi",
   "license": "MIT",
   "devDependencies": {
+    "@cypress/xpath": "^2.0.3",
     "cypress": "^12.12.0"
   }
 }
