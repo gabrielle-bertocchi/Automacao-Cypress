@@ -1,3 +1,4 @@
+///<reference types="Cypress" />
 
 describe('Teste Funcional', () => {
   it('Verificar Titulo', () => {
@@ -9,4 +10,5 @@ describe('Teste Funcional', () => {
     cy.get('.oxd-input[name="username"]').should('have.value', '')
     
   })
+
 })
