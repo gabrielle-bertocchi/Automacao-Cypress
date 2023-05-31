@@ -1,5 +1,5 @@
 describe('Alerts', () => {
-    it.skip('Js alert', () => {
+    it('Js alert', () => {
         cy.visit('https://the-internet.herokuapp.com/javascript_alerts')
         cy.get("button[onclick='jsAlert()']").click();
 
@@ -35,10 +35,35 @@ describe('Alerts', () => {
 
         cy.on('window:confirm', ()=> false) //cypress automatically close alert window by using cancel button
 
-        cy.get('#result').should('have.text', 'You clicked: Cancel');
-
-        
+        cy.get('#result').should('have.text', 'You clicked: Cancel');        
     });
+
+    
+
+    it('Js prompt alert', () => {
+        cy.visit('https://the-internet.herokuapp.com/javascript_alerts')
+
+        cy.window().then((win)=>{
+            cy.stub(win, 'prompt').returns('Welcome');
+        })
+
+        cy.get("button[onclick='jsPrompt()']").click();
+
+        cy.get('#result').should('have.text', 'You entered: Welcome');        
+    });
+
+    it('Authenticated alert', () => {
+
+        cy.visit('https://the-internet.herokuapp.com/basic_auth',{auth:
+                                                                 {username: "admin",
+                                                                 password:"admin"}});
+        
+            //poderia usar tbm assim:
+            //cy.visit('https://admin:admin@the-internet.herokuapp.com/basic_auth')
+
+        cy.get('#content p').should('have.contain', 'Congratulations!');
+    });
+
 
 
 
